@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>SHASHNAM — Sentient City OS | INNOVWAVE 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{font-family:'Inter',sans-serif;color:#e5e7eb;}
+body{background:#0B0F1A;overflow:hidden;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;}
+.slide{width:1440px;height:810px;padding:60px 80px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);overflow:hidden;background:linear-gradient(135deg,#0B0F1A 0%,#020617 100%);display:none;}
+.slide.active{display:block;}
+body.print-mode .slide{display:block!important;position:relative!important;top:auto!important;left:auto!important;transform:none!important;page-break-after:always;}
+.slide::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 30% 20%,rgba(0,229,255,0.04) 0%,transparent 60%);pointer-events:none;}
+h1{font-size:56px;font-weight:700;color:#fff;margin-bottom:12px;line-height:1.15;}
+h2{font-size:44px;font-weight:700;color:#fff;margin-bottom:16px;line-height:1.2;}
+h3{font-size:24px;font-weight:600;color:#00E5FF;margin-bottom:10px;}
+p,.body{font-size:20px;color:#9ca3af;line-height:1.6;}
+.accent{color:#00E5FF;}
+.accent2{color:#4FC3F7;}
+.success{color:#22c55e;}
+.warning{color:#f59e0b;}
+.danger{color:#fa5252;}
+.glass{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:28px 32px;backdrop-filter:blur(20px);box-shadow:0 0 30px rgba(0,229,255,0.05);}
+.glass-sm{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:20px 24px;backdrop-filter:blur(20px);}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;}
+.tag{display:inline-block;padding:4px 14px;border-radius:20px;font-size:13px;font-weight:600;letter-spacing:0.5px;}
+.tag-cyan{background:rgba(0,229,255,0.15);color:#00E5FF;border:1px solid rgba(0,229,255,0.3);}
+.tag-green{background:rgba(34,197,94,0.15);color:#22c55e;border:1px solid rgba(34,197,94,0.3);}
+.tag-red{background:rgba(250,82,82,0.15);color:#fa5252;border:1px solid rgba(250,82,82,0.3);}
+.tag-yellow{background:rgba(245,158,11,0.15);color:#f59e0b;border:1px solid rgba(245,158,11,0.3);}
+.slide-num{position:absolute;bottom:30px;right:50px;font-size:14px;color:rgba(255,255,255,0.25);font-weight:600;}
+.logo-bar{position:absolute;bottom:30px;left:50px;font-size:14px;color:rgba(255,255,255,0.25);font-weight:600;letter-spacing:2px;}
+.metric{font-size:52px;font-weight:900;color:#00E5FF;line-height:1;}
+.metric-label{font-size:16px;color:#9ca3af;margin-top:6px;}
+.arrow-down{display:block;text-align:center;font-size:28px;color:#00E5FF;margin:10px 0;}
+.flow-item{text-align:center;padding:14px 20px;}
+.flow-item .icon{font-size:28px;margin-bottom:6px;}
+.divider{width:60px;height:2px;background:linear-gradient(90deg,#00E5FF,#4FC3F7);margin:8px 0 16px;border-radius:2px;}
+.timeline{display:flex;gap:0;align-items:stretch;}
+.timeline-item{flex:1;padding:24px;border-top:3px solid #00E5FF;position:relative;}
+.timeline-item::before{content:'';position:absolute;top:-8px;left:24px;width:12px;height:12px;background:#00E5FF;border-radius:50%;box-shadow:0 0 12px #00E5FF;}
+.screenshot{width:100%;border-radius:12px;border:1px solid rgba(255,255,255,0.1);box-shadow:0 8px 40px rgba(0,0,0,0.5);}
+.hero-center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:690px;}
+.glow-text{text-shadow:0 0 40px rgba(0,229,255,0.3);}
+.table-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-bottom:1px solid rgba(255,255,255,0.08);}
+.table-cell{padding:16px 24px;font-size:18px;}
+.table-header .table-cell{font-weight:700;color:#00E5FF;border-bottom:2px solid rgba(0,229,255,0.3);}
+@media print{body{overflow:visible!important;display:block!important;}.slide{display:block!important;position:relative!important;top:auto!important;left:auto!important;transform:none!important;page-break-after:always;}}
+.slide-hint{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);font-size:13px;color:rgba(255,255,255,0.2);z-index:100;pointer-events:none;letter-spacing:1px;transition:opacity 0.5s;}
+</style>
+</head>
+<body>
+
+<!-- ==================== SLIDE 1: COVER ==================== -->
+<div class="slide" style="padding:0;">
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0B0F1A,#020617);"></div>
+  <div style="position:absolute;inset:0;background:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%221440%22 height=%22810%22><defs><pattern id=%22g%22 width=%2280%22 height=%2280%22 patternUnits=%22userSpaceOnUse%22><path d=%22M80 0L0 0 0 80%22 fill=%22none%22 stroke=%22rgba(0,229,255,0.06)%22 stroke-width=%220.5%22/></pattern></defs><rect width=%221440%22 height=%22810%22 fill=%22url(%23g)%22/></svg>');opacity:0.7;"></div>
+  <div class="hero-center" style="position:relative;z-index:2;">
+    <div style="margin-bottom:24px;"><span class="tag tag-cyan">INNOVWAVE 2026</span></div>
+    <h1 style="font-size:88px;font-weight:900;letter-spacing:-2px;" class="glow-text">SHASHNAM</h1>
+    <p style="font-size:28px;color:#4FC3F7;font-weight:600;margin:8px 0 20px;">The Sentient City Operating System</p>
+    <div class="divider" style="width:120px;margin:0 auto 20px;"></div>
+    <p style="font-size:20px;color:#9ca3af;max-width:700px;">Replacing Reactive Governance with Generative AI Intelligence</p>
+  </div>
+  <div style="position:absolute;bottom:40px;left:80px;z-index:2;font-size:15px;color:#9ca3af;line-height:1.8;">
+    <strong style="color:#e5e7eb;">Team Da Vinci</strong>
+  </div>
+  <div class="slide-num">01 / 19</div>
+</div>
+
+<!-- ==================== SLIDE 2: PROBLEM ==================== -->
+<div class="slide">
+  <h2>Governments Run on <span class="accent">Fragmented Systems</span></h2>
+  <div class="divider"></div>
+  <div class="two-col" style="margin-top:32px;">
+    <div style="display:flex;flex-direction:column;gap:20px;">
+      <div class="glass">
+        <h3>🔒 Siloed Data</h3>
+        <p>Departments operate independently with no shared intelligence. Water doesn't talk to Transport. Health doesn't know about Economy.</p>
+      </div>
+      <div class="glass">
+        <h3>🔥 Reactive Governance</h3>
+        <p>Policies are created <em>after</em> crises instead of preventing them. Average response time: <strong class="danger">72 hours</strong>.</p>
+      </div>
+      <div class="glass">
+        <h3>🚫 Opaque Decisions</h3>
+        <p>Citizens cannot understand why policies are made. Trust in governance declining globally.</p>
+      </div>
+    </div>
+    <div class="glass" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;">
+      <div style="font-size:18px;font-weight:600;color:#fa5252;margin-bottom:8px;">Fragmented Governance</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div class="glass-sm" style="border-color:rgba(250,82,82,0.3);"><span style="font-size:28px;">💧</span><br><span style="font-size:14px;">Water Dept</span></div>
+        <div class="glass-sm" style="border-color:rgba(250,82,82,0.3);"><span style="font-size:28px;">⚡</span><br><span style="font-size:14px;">Power Dept</span></div>
+        <div class="glass-sm" style="border-color:rgba(250,82,82,0.3);"><span style="font-size:28px;">🚌</span><br><span style="font-size:14px;">Transport</span></div>
+        <div class="glass-sm" style="border-color:rgba(250,82,82,0.3);"><span style="font-size:28px;">🏥</span><br><span style="font-size:14px;">Health Dept</span></div>
+      </div>
+      <div style="font-size:48px;color:rgba(250,82,82,0.4);margin-top:8px;">✕</div>
+      <p style="font-size:15px;color:#fa5252;">No shared intelligence between departments</p>
+    </div>
+  </div>
+  <div class="logo-bar">SHASHNAM OS</div><div class="slide-num">02 / 19</div>
+</div>
+
+<!-- ==================== SLIDE 3: VISION ==================== -->
+<div class="slide">
+  <div class="hero-center" style="min-height:auto;padding:20px 0;">
+    <h2>What if Cities Had an <span class="accent">Operating System?</span></h2>
+    <div class="divider" style="margin:12px auto 40px;width:100px;"></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:0;">
+      <div class="glass-sm flow-item"><span class="icon">🏙️</span><br>City Infrastructure</div>
+      <div class="arrow-down">↓</div>
+      <div class="glass-sm flow-item"><span class="icon">📡</span><br>Real-Time Data Streams</div>
+      <div class="arrow-down">↓</div>
+      <div class="glass-sm flow-item" style="border-color:rgba(0,229,255,0.4);box-shadow:0 0 20px rgba(0,229,255,0.1);"><span class="icon">🧠</span><br><strong class="accent">AI Intelligence Layer</strong></div>
+      <div class="arrow-down">↓</div>
+      <div class="glass-sm flow-item"><span class="icon">📊</span><br>Shashnam OS Dashboard</div>
+      <div class="arrow-down">↓</div>
+      <div class="glass-sm flow-item"><span class="icon">⚖️</span><br>Data-Driven Policy Decisions</div>
+    </div>
+    <p style="margin-top:36px;max-width:800px;text-align:center;font-size:20px;color:#9ca3af;">
+      Shashnam is an AI Operating System that lets governments <strong class="accent">simulate the future</strong> before making decisions.
+    </p>
+  </div>
+  <div class="logo-bar">SHASHNAM OS</div><div class="slide-num">03 / 19</div>
+</div>
+
+<!-- ==================== SLIDE 4: DIGITAL TWIN ==================== -->
+<div class="slide">
+  <h2>A Living <span class="accent">Digital Twin</span> of the City</h2>
+  <div class="divider"></div>
+  <div class="two-col" style="margin-top:32px;">
+    <div>
+      <p style="margin-bottom:24px;">Shashnam creates a <strong>real-time virtual replica</strong> of every major city system, enabling simulation before implementation.</p>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div class="glass-sm" style="display:flex;align-items:center;gap:16px;"><span style="font-size:24px;">⚡</span><div><strong>Power Grid</strong><br><span style="font-size:15px;color:#9ca3af;">Load balancing, renewable mix, battery storage</span></div></div>
+        <div class="glass-sm" style="display:flex;align-items:center;gap:16px;"><span style="font-size:24px;">💧</span><div><strong>Water Infrastructure</strong><br><span style="font-size:15px;color:#9ca3af;">Reservoir levels, purification, pressure networks</span></div></div>
+        <div class="glass-sm" style="display:flex;align-items:center;gap:16px;"><span style="font-size:24px;">🚌</span><div><strong>Transport Networks</strong><br><span style="font-size:15px;color:#9ca3af;">Traffic flow, smart lights, transit punctuality</span></div></div>
+        <div class="glass-sm" style="display:flex;align-items:center;gap:16px;"><span style="font-size:24px;">🏥</span><div><strong>Healthcare Systems</strong><br><span style="font-size:15px;color:#9ca3af;">ER capacity, supply chains, outbreak tracking</span></div></div>
+        <div class="glass-sm" style="display:flex;align-items:center;gap:16px;"><span style="font-size:24px;">📊</span><div><strong>Economy & Sentiment</strong><br><span style="font-size:15px;color:#9ca3af;">Tax revenue, public approval, trending issues</span></div></div>
+      </div>
+    </div>
+    <div class="glass" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:20px;">
+      <div style="font-size:16px;color:#9ca3af;">CITY HEALTH INDEX</div>
+      <div class="metric">94.2</div>
+      <div class="metric-label">out of 100 — Nominal Baseline</div>
+      <div class="divider" style="margin:8px auto;"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;">
+        <div class="glass-sm" style="text-align:center;"><div style="font-size:14px;color:#9ca3af;">Power</div><div style="font-size:22px;font-weight:700;" class="success">96.2%</div></div>
+        <div class="glass-sm" style="text-align:center;"><div style="font-size:14px;color:#9ca3af;">Water</div><div style="font-size:22px;font-weight:700;" class="warning">82.1%</div></div>
+        <div class="glass-sm" style="text-align:center;"><div style="font-size:14px;color:#9ca3af;">Transport</div><div style="font-size:22px;font-weight:700;" class="success">89.5%</div></div>
+        <div class="glass-sm" style="text-align:center;"><div style="font-size:14px;color:#9ca3af;">Sentiment</div><div style="font-size:22px;font-weight:700;" class="warning">68.0%</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="logo-bar">SHASHNAM OS</div><div class="slide-num">04 / 19</div>
+</div>
+
+<!-- ==================== SLIDE 5: POLICY SIMULATION ==================== -->
+<div class="slide">
+  <h2>Simulate Policies <span class="accent">Before Implementing Them</span></h2>
+  <div class="divider"></div>
+  <div class="two-col" style="margin-top:32px;">
+    <div>
+      <div class="glass" style="margin-bottom:20px;">
+        <div style="font-size:14px;color:#00E5FF;font-weight:600;margin-bottom:8px;">POLICY INPUT (Natural Language)</div>
+        <div style="background:rgba(0,0,0,0.4);padding:16px;border-radius:8px;font-family:monospace;font-size:16px;color:#e5e7eb;">Increase commercial water tariff by 12% across Zone A and Zone B.</div>
+      </div>
+      <div style="font-size:14px;color:#00E5FF;font-weight:600;margin-bottom:12px;">AI PREDICTED IMPACTS</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="glass-sm" style="text-align:center;"><div style="font-size:13px;color:#9ca3af;">Systemic Risk</div><div style="font-size:28px;font-weight:700;color:#22c55e;">1.2 / 10</div></div>
+        <div class="glass-sm" style="text-align:center;"><div style="font-size:13px;color:#9ca3af;">Domain Efficacy</div><div style="font-size:28px;font-weight:700;color:#00E5FF;">+18.4%</div></div>
+        <div class="glass-sm" style="text-align:center;"><div style="font-size:13px;color:#9ca3af;">Citizen Approval Δ</div><div style="font-size:28px;font-weight:700;color:#f59e0b;">-4.2%</div></div>
+        <div class="glass-sm" style="text-align:center;"><div style="font-size:13px;color:#9ca3af;">Revenue Impact</div><div style="font-size:28px;font-weight:700;color:#22c55e;">+$2.1M</div></div>
+      </div>
+    </div>
+    <div class="glass" style="text-align:center;">
+      <div style="font-size:14px;color:#00E5FF;font-weight:600;margin-bottom:16px;">30-DAY PROJECTED IMPACT</div>
+      <svg width="520" height="280" viewBox="0 0 520 280">
+        <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00E5FF" stop-opacity="0.3"/><stop offset="100%" stop-color="#00E5FF" stop-opacity="0"/></linearGradient></defs>
+        <line x1="40" y1="240" x2="500" y2="240" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+        <line x1="40" y1="180" x2="500" y2="180" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+        <line x1="40" y1="120" x2="500" y2="120" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+        <line x1="40" y1="60" x2="500" y2="60" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+        <path d="M40,200 L150,195 L260,190 L370,185 L500,180" stroke="#fa5252" stroke-width="2" fill="none" opacity="0.6"/>
+        <path d="M40,200 L150,170 L260,130 L370,100 L500,80" stroke="#00E5FF" stroke-width="2.5" fill="none"/>
+        <path d="M40,200 L150,170 L260,130 L370,100 L500,80 L500,240 L40,240 Z" fill="url(#g1)"/>
+        <text x="40" y="260" fill="#9ca3af" font-size="12">Day 1</text>
+        <text x="260" y="260" fill="#9ca3af" font-size="12">Day 15</text>
+        <text x="480" y="260" fill="#9ca3af" font-size="12">Day 30</text>
+        <circle cx="500" cy="180" r="4" fill="#fa5252"/><text x="420" y="175" fill="#fa5252" font-size="11">Baseline</text>
+        <circle cx="500" cy="80" r="4" fill="#00E5FF"/><text x="410" y="75" fill="#00E5FF" font-size="11">Projected</text>
+      </svg>
+    </div>
+  </div>
+  <div class="logo-bar">SHASHNAM OS</div><div class="slide-num">05 / 19</div>
+</div>
+
+<!-- ==================== SLIDE 6: BUTTERFLY EFFECT ==================== -->
+<div class="slide">
+  <h2>Predicting Hidden <span class="danger">Systemic Risks</span></h2>
+  <div class="divider"></div>
+  <p style="margin-bottom:32px;max-width:800px;">The AI scans across all city domains simultaneously, connecting invisible dots that humans miss.</p>
+  <div class="glass" style="max-width:1100px;margin:0 auto;">
+    <div style="display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;">
+      <div class="glass-sm" style="text-align:center;border-color:rgba(245,158,11,0.3);"><span style="font-size:28px;">💧</span><br><span style="font-size:14px;">Water Pressure<br><strong class="warning">-15%</strong></span></div>
+      <div style="font-size:32px;color:rgba(255,255,255,0.2);">+</div>
+      <div class="glass-sm" style="text-align:center;border-color:rgba(245,158,11,0.3);"><span style="font-size:28px;">🚌</span><br><span style="font-size:14px;">Transit Delays<br><strong class="warning">+2 min</strong></span></div>
+      <div style="font-size:32px;color:rgba(255,255,255,0.2);">+</div>
+      <div class="glass-sm" style="text-align:center;border-color:rgba(250,82,82,0.3);"><span style="font-size:28px;">🏥</span><br><span style="font-size:14px;">Respiratory ER<br><strong class="danger">+4%</strong></span></div>
+      <div style="font-size:40px;color:#00E5FF;">→</div>
+      <div class="glass-sm" style="text-align:center;border-color:rgba(250,82,82,0.5);background:rgba(250,82,82,0.08);min-width:200px;">
+        <span style="font-size:28px;">⚠️</span><br>
+        <strong class="danger" style="font-size:16px;">Underground Chemical Leak</strong><br>
+        <span style="font-size:13px;color:#9ca3af;">89% confidence</span>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:24px;">
+      <span class="tag tag-red" style="font-size:16px;padding:8px 24px;">⏱ 48-HOUR EARLY WARNING</span>
+    </div>
+    <p style="text-align:center;margin-top:16px;font-size:16px;color:#9ca3af;">
+      <strong class="accent">Auto-Action:</strong> Dispatch Hazmat Unit 4 · Reroute civilian traffic via Smart Lights · Alert hospitals
+    </p>
+  </div>
+  <div class="logo-bar">SHASHNAM OS</div><div class="slide-num">06 / 19</div>
+</div>
+
+<!-- ==================== SLIDE 7: AUTONOMOUS OPTIMIZATION ==================== -->
+<div class="slide">
+  <h2>Cities That <span class="accent">Optimize Themselves</span></h2>
+  <div class="divider"></div>
+  <p style="margin-bottom:32px;">Shashnam deploys autonomous micro-policies — small AI-driven adjustments that optimize city operations in real-time without human intervention.</p>
+  <div class="three-col" style="margin-top:12px;">
+    <div class="glass" style="text-align:center;"><span style="font-size:48px;">🚦</span><div style="margin-top:12px;"><strong>Smart Traffic</strong></div><p style="font-size:15px;margin-top:8px;">Traffic lights reroute automatically based on real-time congestion data from 1,204 smart intersections.</p><div style="margin-top:12px;"><span class="tag tag-green">Active</span></div></div>
+    <div class="glass" style="text-align:center;"><span style="font-size:48px;">⚡</span><div style="margin-top:12px;"><strong>Grid Balancing</strong></div><p style="font-size:15px;margin-top:8px;">Energy grid autonomously shifts load between zones. Battery storage optimized to 88% efficiency.</p><div style="margin-top:12px;"><span class="tag tag-green">Active</span></div></div>
+    <div class="glass" style="text-align:center;"><span style="font-size:48px;">💧</span><div style="margin-top:12px;"><strong>Water Demand</strong></div><p style="font-size:15px;margin-top:8px;">Distribution pressure adapts to real-time consumption patterns. Leak detection at IoT sensor resolution.</p><div style="margin-top:12px;"><span class="tag tag-green">Active</span></div></div>
+  </div>
+  <div class="three-col" style="margin-top:24px;">
+    <div class="glass" style="text-align:center;"><span style="font-size:48px;">🚃</span><div style="margin-top:12px;"><strong>Transit Routing</strong></div><p style="font-size:15px;margin-top:8px;">Public transport dynamically reroutes around bottlenecks. 98.2% punctuality maintained.</p><div style="margin-top:12px;"><span class="tag tag-green">Active</span></div></div>
+    <div class="glass" style="text-align:center;"><span style="font-size:48px;">🌡️</span><div style="margin-top:12px;"><strong>HVAC Control</strong></div><p style="font-size:15px;margin-top:8px;">Building climate systems optimized using weather forecasts. Energy savings of 12-18%.</p><div style="margin-top:12px;"><span class="tag tag-cyan">Optimized</span></div></div>
+    <div class="glass" style="text-align:center;"><span style="font-size:48px;">💰</span><div style="margin-top:12px;"><strong>Budget Allocation</strong></div><p style="font-size:15px;margin-top:8px;">Funds auto-reallocated daily from low-ROI projects to urgent IoT-flagged repairs.</p><div style="margin-top:12px;"><span class="tag tag-cyan">AI Treasury</span></div></div>
+  </div>
+  <div class="logo-bar">SHASHNAM OS</div><div class="slide-num">07 / 19</div>
+</div>
+
+<!-- ==================== SLIDE 8: AI LEGISLATIVE ASSISTANT ==================== -->
+<div class="slide">
+  <h2>From Policy Idea to <span class="accent">Legal Ordinance</span> in Minutes</h2>
+  <div class="divider"></div>
+  <div class="two-col" style="margin-top:32px;">
+    <div>
+      <div class="glass" style="margin-bottom:24px;">
+        <div style="font-size:14px;color:#00E5FF;font-weight:600;margin-bottom:12px;">📝 POLICY IDEA</div>
+        <div style="background:rgba(0,0,0,0.4);padding:16px;border-radius:8px;font-family:monospace;font-size:17px;color:#e5e7eb;">Reduce downtown congestion by 10% through congestion pricing in commercial zones.</div>
+      </div>
+      <div class="arrow-down" style="font-size:40px;">⬇️</div>
+      <div class="glass" style="margin-top:16px;">
+        <div style="font-size:14px;color:#22c55e;font-weight:600;margin-bottom:12px;">✅ ONE-CLICK OUTPUT</div>
+        <ul style="list-style:none;font-size:16px;color:#9ca3af;line-height:2;">
+          <li>✓ Full municipal ordinance in legal language</li>
+          <li>✓ Referenced zoning codes and section numbers</li>
+          <li>✓ Simulation data cited as evidence</li>
+          <li>✓ Ready for council ratification</li>
+        </ul>
+      </div>
+    </div>
+    <div class="glass" style="font-family:monospace;font-size:14px;line-height:1.7;color:#c9d1d9;background:rgba(0,0,0,0.3);">
+      <div style="font-size:12px;color:#00E5FF;margin-bottom:12px;">AI-DRAFTED MUNICIPAL CODE</div>
+      <strong>ORDINANCE NO. 2026-04</strong><br>
+      CITY OF SHASHNAM<br><br>
+      AN ORDINANCE AMENDING TITLE 14 (PUBLIC SERVICES), CHAPTER 2 (WATER PRESERVATION) OF THE MUNICIPAL CODE...<br><br>
+      <span class="accent2">WHEREAS</span>, the City recognizes the critical need to preserve municipal water reserves; and<br><br>
+      <span class="accent2">WHEREAS</span>, generative multi-agent simulation projects an 18.4% reduction in systemic load;<br><br>
+      <span class="accent2">NOW, THEREFORE, BE IT ORDAINED</span> BY THE CITY COUNCIL:<br><br>
+      Section 1. Section 14.02.040 is hereby amended to reflect a 12% ad valorem tariff increase...<br><br>
+      <div style="text-align:right;margin-top:12px;">
+        <span style="display:inline-block;padding:8px 20px;background:rgba(34,197,94,0.2);border:1px solid rgba(34,197,94,0.4);border-radius:8px;color:#22c55e;font-weight:600;">Ratify & Enact ✓</span>
+      </div>
+    </div>
+  </div>
+  <div class="logo-bar">SHASHNAM OS</div><div class="slide-num">08 / 19</div>
+</div>
+
+<!-- ==================== SLIDE 9: CRISIS INTELLIGENCE ==================== -->
+<div class="slide">
+  <h2>AI-Powered <span class="danger">Disaster Response</span></h2>
+  <div class="divider"></div>
+  <div class="glass" style="margin-top:16px;padding:16px 24px;border-color:rgba(250,82,82,0.4);background:rgba(250,82,82,0.06);display:flex;align-items:center;justify-content:space-between;">
+    <div><span class="danger" style="font-weight:700;font-size:18px;">⚠ ACTIVE CRISIS MODULE:</span> <span style="font-size:18px;">Category 5 Hurricane — Eastern Seaboard</span></div>
+    <span class="tag tag-red">CRITICAL</span>
+  </div>
+  <div class="three-col" style="margin-top:24px;">
+    <div class="glass" style="text-align:center;">
+      <div style="font-size:13px;color:#9ca3af;text-transform:uppercase;letter-spacing:1px;">AI-Spawned Widget</div>
+      <div style="font-size:13px;font-weight:600;color:#00E5FF;margin:4px 0 12px;">EVACUATION RATE</div>
+      <div class="metric">4,200<span style="font-size:24px;color:#9ca3af;">/hr</span></div>
+      <p style="font-size:14px;margin-top:10px;color:#f59e0b;">Bottleneck extending on I-95</p>
+    </div>
+    <div class="glass" style="text-align:center;">
+      <div style="font-size:13px;color:#9ca3af;text-transform:uppercase;letter-spacing:1px;">AI-Spawned Widget</div>
+      <div style="font-size:13px;font-weight:600;color:#00E5FF;margin:4px 0 12px;">SHELTER CAPACITY</div>
+      <div class="metric">88<span style="font-size:24px;color:#9ca3af;">%</span></div>
+      <p style="font-size:14px;margin-top:10px;color:#fa5252;">Critical: Approaching MAX</p>
+    </div>
+    <div class="glass" style="text-align:center;">
+      <div style="font-size:13px;color:#9ca3af;text-transform:uppercase;letter-spacing:1px;">Infrastructure Risk</div>
+      <div style="font-size:13px;font-weight:600;color:#00E5FF;margin:4px 0 12px;">PREDICTION</div>
+      <div class="metric" style="color:#fa5252;">Severe</div>
+      <p style="font-size:14px;margin-top:10px;color:#fa5252;">South Reservoir Levee at risk</p>
+    </div>
+  </div>
+  <div class="glass" style="margin-top:24px;">
+    <div style="font-size:16px;font-weight:600;color:#f59e0b;margin-bottom:16px;">📋 Auto-Drafted Executive Orders</div>
+    <div style="display:flex;gap:16px;">
+      <div class="glass-sm" style="flex:1;display:flex;justify-content:space-between;align-items:center;">
+        <div><strong>Mandatory Evacuation Zones 1-3</strong><br><span style="font-size:14px;color:#9ca3af;">Drafted by AI 1 min ago based on wind projections</span></div>
+        <span class="tag tag-red">Ratify Now</span>
+      </div>
+      <div class="glass-sm" style="flex:1;display:flex;justify-content:space-between;align-items:center;">
+        <div><strong>Re-route Rail Supply Lines</strong><br><span style="font-size:14px;color:#9ca3af;">To preserve medical supply throughput</span></div>
+        <span class="tag tag-red">Ratify Now</span>
+      </div>
+    </div>
+  </div>
+  <div class="logo-bar">SHASHNAM OS</div><div class="slide-num">09 / 19</div>
+</div>
+
+<!-- ==================== SLIDE 10: CITIZEN TRANSPARENCY ==================== -->
+<div class="slide">
+  <h2>Transparent <span class="accent">AI Governance</span></h2>
+  <div class="divider"></div>
+  <p style="margin-bottom:28px;">Citizens deserve to know why AI decisions are being made. Shashnam provides a <strong>read-only public portal</strong> with full explainability.</p>
+  <div class="two-col">
+    <div>
+      <div class="glass" style="margin-bottom:20px;">
+        <div style="font-size:14px;color:#00E5FF;font-weight:600;margin-bottom:12px;">🔍 CITIZEN QUESTION</div>
+        <div style="background:rgba(0,0,0,0.4);padding:14px;border-radius:8px;font-size:18px;color:#e5e7eb;">Why did the government increase my water tax?</div>
+      </div>
+      <div class="glass" style="border-color:rgba(34,197,94,0.3);">
+        <div style="font-size:14px;color:#22c55e;font-weight:600;margin-bottom:12px;">🤖 AI EXPLANATION</div>
+        <ul style="list-style:none;font-size:16px;color:#9ca3af;line-height:2;">
+          <li>📈 Water demand increased <strong class="accent">18%</strong> this quarter</li>
+          <li>📉 Reservoir levels dropped to <strong class="warning">62%</strong></li>
+          <li>🔮 AI simulation predicted shortage by August</li>
+          <li>✅ Policy prevents rationing for 200K households</li>
+          <li>📊 Risk score lowered from 8.2 → <strong class="success">1.1</strong></li>
+        </ul>
+      </div>
+    </div>
+    <div class="glass" style="text-align:center;">
+      <div style="font-size:16px;color:#9ca3af;margin-bottom:8px;">CITY HEALTH OVERVIEW</div>
+      <div class="metric" style="font-size:72px;">94.2%</div>
+      <p style="font-size:16px;color:#9ca3af;margin-top:8px;">Overall Infrastructure Health Score</p>
+      <div class="divider" style="margin:16px auto;"></div>
+      <p style="font-size:15px;color:#9ca3af;">The city is running optimally. Only 2 active minor anomalies being monitored by the AI.</p>
+      <div style="margin-top:20px;text-align:left;">
+        <div class="glass-sm" style="margin-bottom:10px;">
+          <strong>Traffic Rerouted (Main St)</strong> — 2 hours ago<br>
+          <span style="font-size:13px;color:#9ca3af;">AI diverted 15% traffic to relieve congestion</span>
+        </div>
+        <div class="glass-sm">
+          <strong>Water Tariff Adjusted (Zone C)</strong> — Yesterday<br>
+          <span style="font-size:13px;color:#9ca3af;">Conservation-mode pricing activated</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="logo-bar">SHASHNAM OS</div><div class="slide-num">10 / 19</div>
+</div>
+
+<!-- ==================== SLIDE 11: MARKET OPPORTUNITY ==================== -->
+<div class="slide">
+  <h2>The <span class="accent">Smart City</span> Market</h2>
+  <div class="divider"></div>
+  <div class="two-col" style="margin-top:32px;">
+    <div style="display:flex;flex-direction:column;justify-content:center;gap:24px;">
+      <div class="glass" style="text-align:center;">
+        <div style="font-size:16px;color:#9ca3af;">Total Addressable Market (TAM)</div>
+        <div class="metric" style="font-size:72px;">$1T+</div>
+        <p style="font-size:14px;color:#9ca3af;">Global Smart City spending by 2030</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div class="glass" style="text-align:center;">
+          <div style="font-size:14px;color:#9ca3af;">SAM</div>
+          <div style="font-size:36px;font-weight:900;color:#4FC3F7;">$12B</div>
+          <p style="font-size:13px;color:#9ca3af;">AI Governance Solutions</p>
+        </div>
+        <div class="glass" style="text-align:center;">
+          <div style="font-size:14px;color:#9ca3af;">SOM</div>
+          <div style="font-size:36px;font-weight:900;color:#22c55e;">$120M</div>
+          <p style="font-size:13px;color:#9ca3af;">India Smart Cities Mission</p>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;">
+      <div class="glass">
+        <h3>🏛️ Government = Largest Customer</h3>
+        <p style="font-size:16px;">Governments are the largest organizations on earth. Every city, state, and nation needs operational intelligence.</p>
+      </div>
+      <div class="glass">
+        <h3>🇮🇳 India's Smart Cities Mission</h3>
+        <p style="font-size:16px;">100 cities selected. $30B allocated. Zero have an AI OS. <strong class="accent">First-mover advantage.</strong></p>
+      </div>
+      <div class="glass">
+        <h3>🌍 Global Expansion</h3>
+        <p style="font-size:16px;">EU's €1.5B Horizon Europe program funds smart city AI. Middle East's NEOM, Saudi Vision 2030.</p>
+      </div>
+    </div>
+  </div>
+  <div class="logo-bar">SHASHNAM OS</div><div class="slide-num">11 / 19</div>
+</div>
+
+<!-- ==================== SLIDE 12: BUSINESS MODEL ==================== -->
+<div class="slide">
+  <h2>Revenue <span class="accent">Model</span></h2>
+  <div class="divider"></div>
+  <div class="three-col" style="margin-top:40px;">
+    <div class="glass" style="text-align:center;border-color:rgba(79,195,247,0.3);">
+      <div style="font-size:48px;margin-bottom:12px;">🏘️</div>
+      <h3 style="font-size:20px;">Pilot City</h3>
+      <div style="font-size:14px;color:#9ca3af;">Population &lt; 100K</div>
+      <div class="divider" style="margin:16px auto;"></div>
+      <div style="font-size:40px;font-weight:900;color:#4FC3F7;">$50K</div>
+      <div style="font-size:16px;color:#9ca3af;">per year</div>
+      <div class="divider" style="margin:16px auto;width:40px;"></div>
+      <ul style="list-style:none;font-size:14px;color:#9ca3af;text-align:left;line-height:2;">
+        <li>✓ Core OS Dashboard</li>
+        <li>✓ 3 Domain Modules</li>
+        <li>✓ Policy Simulation</li>
+        <li>✓ Basic Analytics</li>
+      </ul>
+    </div>
+    <div class="glass" style="text-align:center;border-color:rgba(0,229,255,0.4);box-shadow:0 0 30px rgba(0,229,255,0.1);transform:scale(1.05);">
+      <div style="font-size:48px;margin-bottom:12px;">🏙️</div>
+      <h3 style="font-size:20px;">Enterprise City</h3>
+      <div style="font-size:14px;color:#9ca3af;">Population 100K–1M</div>
+      <div class="divider" style="margin:16px auto;"></div>
+      <div style="font-size:40px;font-weight:900;color:#00E5FF;">$500K</div>
+      <div style="font-size:16px;color:#9ca3af;">per year</div>
+      <div class="divider" style="margin:16px auto;width:40px;"></div>
+      <ul style="list-style:none;font-size:14px;color:#9ca3af;text-align:left;line-height:2;">
+        <li>✓ Full OS + All Domains</li>
+        <li>✓ Digital Twin Engine</li>
+        <li>✓ Crisis Management</li>
+        <li>✓ Citizen Portal</li>
+        <li>✓ Custom AI Models</li>
+      </ul>
+      <div style="margin-top:12px;"><span class="tag tag-cyan">RECOMMENDED</span></div>
+    </div>
+    <div class="glass" style="text-align:center;border-color:rgba(34,197,94,0.3);">
+      <div style="font-size:48px;margin-bottom:12px;">🌐</div>
+      <h3 style="font-size:20px;">National Deployment</h3>
+      <div style="font-size:14px;color:#9ca3af;">State / Federal</div>
+      <div class="divider" style="margin:16px auto;"></div>
+      <div style="font-size:40px;font-weight:900;color:#22c55e;">$2M+</div>
+      <div style="font-size:16px;color:#9ca3af;">per year</div>
+      <div class="divider" style="margin:16px auto;width:40px;"></div>
+      <ul style="list-style:none;font-size:14px;color:#9ca3af;text-align:left;line-height:2;">
+        <li>✓ Multi-City Federation</li>
+        <li>✓ Legal Integration</li>
+        <li>✓ National Analytics</li>
+        <li>✓ On-Premise Option</li>
+        <li>✓ 24/7 Support</li>
+      </ul>
+    </div>
+  </div>
+  <div class="logo-bar">SHASHNAM OS</div><div class="slide-num">12 / 19</div>
+</div>
+
+<!-- ==================== SLIDE 13: ROADMAP ==================== -->
+<div class="slide">
+  <h2>Product <span class="accent">Roadmap</span></h2>
+  <div class="divider"></div>
+  <div class="timeline" style="margin-top:48px;">
+    <div class="timeline-item glass-sm">
+      <div style="font-size:14px;color:#00E5FF;font-weight:700;margin-bottom:8px;">2026 — NOW</div>
+      <h3 style="font-size:20px;color:#fff;">Prototype + Pilot</h3>
+      <ul style="list-style:none;font-size:15px;color:#9ca3af;line-height:2;margin-top:8px;">
+        <li>✅ Full simulation engine built</li>
+        <li>✅ 12+ AI algorithms deployed</li>
+        <li>✅ React dashboard live</li>
+        <li>✅ Palantir-style intelligence</li>
+        <li>⏳ Partner with 1 pilot city</li>
+      </ul>
+      <div style="margin-top:12px;"><span class="tag tag-green">CURRENT STAGE</span></div>
+    </div>
+    <div class="timeline-item glass-sm">
+      <div style="font-size:14px;color:#4FC3F7;font-weight:700;margin-bottom:8px;">2027</div>
+      <h3 style="font-size:20px;color:#fff;">Multi-City Deployment</h3>
+      <ul style="list-style:none;font-size:15px;color:#9ca3af;line-height:2;margin-top:8px;">
+        <li>🔗 Real IoT sensor integration</li>
+        <li>🏙️ Deploy to 5+ cities</li>
+        <li>📱 Citizen mobile companion app</li>
+        <li>🔐 Government compliance certs</li>
+      </ul>
+    </div>
+    <div class="timeline-item glass-sm">
+      <div style="font-size:14px;color:#4FC3F7;font-weight:700;margin-bottom:8px;">2028</div>
+      <h3 style="font-size:20px;color:#fff;">Global Smart City OS</h3>
+      <ul style="list-style:none;font-size:15px;color:#9ca3af;line-height:2;margin-top:8px;">
+        <li>🌍 International expansion</li>
+        <li>🔌 Open API marketplace</li>
+        <li>🤖 Custom AI model marketplace</li>
+        <li>🏛️ Cross-city intelligence sharing</li>
+      </ul>
+    </div>
+  </div>
+  <div class="logo-bar">SHASHNAM OS</div><div class="slide-num">13 / 19</div>
+</div>
+
+<!-- ==================== SLIDE 14: WHY SHASHNAM ==================== -->
+<div class="slide">
+  <h2>Why <span class="accent">Shashnam?</span></h2>
+  <div class="divider"></div>
+  <div class="three-col" style="margin-top:40px;">
+    <div class="glass" style="text-align:center;padding:36px;">
+      <div style="font-size:56px;margin-bottom:16px;">🧠</div>
+      <h3 style="font-size:22px;color:#fff;">AI-Driven Governance</h3>
+      <p style="font-size:16px;margin-top:12px;">Not another dashboard. A <strong class="accent">thinking system</strong> that anticipates, simulates, and optimizes city operations autonomously.</p>
+    </div>
+    <div class="glass" style="text-align:center;padding:36px;">
+      <div style="font-size:56px;margin-bottom:16px;">🔮</div>
+      <h3 style="font-size:22px;color:#fff;">Predictive Crisis Intelligence</h3>
+      <p style="font-size:16px;margin-top:12px;">Cross-domain anomaly detection finds invisible correlations. <strong class="accent">48-hour early warnings</strong> before crises materialize.</p>
+    </div>
+    <div class="glass" style="text-align:center;padding:36px;">
+      <div style="font-size:56px;margin-bottom:16px;">🏛️</div>
+      <h3 style="font-size:22px;color:#fff;">Transparent Public Policy</h3>
+      <p style="font-size:16px;margin-top:12px;">Every AI decision is explainable. Citizens see <strong class="accent">why</strong> policies exist. Trust through radical transparency.</p>
+    </div>
+  </div>
+  <div class="glass" style="margin-top:40px;text-align:center;padding:32px;border-color:rgba(0,229,255,0.3);box-shadow:0 0 40px rgba(0,229,255,0.08);">
+    <p style="font-size:24px;color:#e5e7eb;line-height:1.6;">
+      Governments <strong>will</strong> eventually run on intelligent operating systems.<br>
+      <strong class="accent" style="font-size:28px;">Shashnam builds that future.</strong>
+    </p>
+  </div>
+  <div class="logo-bar">SHASHNAM OS</div><div class="slide-num">14 / 19</div>
+</div>
+
+<!-- ==================== SLIDE 15: CLOSING ==================== -->
+<div class="slide" style="padding:0;">
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0B0F1A,#020617);"></div>
+  <div style="position:absolute;inset:0;background:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%221440%22 height=%22810%22><defs><pattern id=%22g2%22 width=%2280%22 height=%2280%22 patternUnits=%22userSpaceOnUse%22><path d=%22M80 0L0 0 0 80%22 fill=%22none%22 stroke=%22rgba(0,229,255,0.06)%22 stroke-width=%220.5%22/></pattern></defs><rect width=%221440%22 height=%22810%22 fill=%22url(%23g2)%22/></svg>');opacity:0.7;"></div>
+  <div class="hero-center" style="position:relative;z-index:2;">
+    <h1 style="font-size:64px;font-weight:900;" class="glow-text">Let's Build the Sentient City</h1>
+    <div class="divider" style="width:120px;margin:20px auto 24px;"></div>
+    <p style="font-size:28px;color:#4FC3F7;font-weight:600;">Shashnam OS</p>
+    <p style="font-size:20px;color:#9ca3af;margin-top:8px;">The Operating System for Future Governments</p>
+    <div style="margin-top:40px;display:flex;gap:20px;">
+      <span class="tag tag-cyan" style="font-size:16px;padding:10px 24px;">🌐 shashnam.ai</span>
+      <span class="tag tag-green" style="font-size:16px;padding:10px 24px;">📧 Contact Us</span>
+    </div>
+  </div>
+  <div class="slide-num" style="z-index:2;">15 / 19</div>
+</div>
+
+<!-- ==================== SLIDE 16: DEMO — COMMAND CENTER ==================== -->
+<div class="slide">
+  <h2>Live Prototype: <span class="accent">Digital Twin Command Center</span></h2>
+  <div class="divider"></div>
+  <p style="margin-bottom:20px;">The central nervous system of the OS. Real-time City Health Index at <strong class="success">94.2</strong>, with Butterfly Effect 48hr crisis alerting and Minority Report predictive maintenance.</p>
+  <img class="screenshot" src="screenshot_01_command_center_1773518435021.png" alt="Command Center">
+  <div class="logo-bar">SHASHNAM OS</div><div class="slide-num">16 / 19</div>
+</div>
+
+<!-- ==================== SLIDE 17: DEMO — POLICY SIM ==================== -->
+<div class="slide">
+  <h2>Live Prototype: <span class="accent">Policy Simulation Engine</span></h2>
+  <div class="divider"></div>
+  <p style="margin-bottom:20px;">Natural language policy input → 30-day projected impact charts, multi-agent persona feedback (Café Owner, Family, Manager), causal ripple effects, and one-click legal draft generation.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <img class="screenshot" src="screenshot_05_simulation_results_1773518538368.png" alt="Simulation Results">
+    <img class="screenshot" src="screenshot_07_legal_draft_1773518553793.png" alt="Legal Draft Modal">
+  </div>
+  <div class="logo-bar">SHASHNAM OS</div><div class="slide-num">17 / 19</div>
+</div>
+
+<!-- ==================== SLIDE 18: DEMO — CRISIS ==================== -->
+<div class="slide">
+  <h2>Live Prototype: <span class="danger">Generative Crisis Management</span></h2>
+  <div class="divider"></div>
+  <p style="margin-bottom:20px;">Type any crisis scenario → AI dynamically generates the entire response dashboard with evacuation widgets, shelter capacity, infrastructure risk predictions, and auto-drafted executive orders.</p>
+  <img class="screenshot" src="screenshot_10_crisis_active_1773518640465.png" alt="Crisis Dashboard">
+  <div class="logo-bar">SHASHNAM OS</div><div class="slide-num">18 / 19</div>
+</div>
+
+<!-- ==================== SLIDE 19: DEMO — CITIZEN PORTAL ==================== -->
+<div class="slide">
+  <h2>Live Prototype: <span class="accent">Citizen Intelligence Portal</span></h2>
+  <div class="divider"></div>
+  <p style="margin-bottom:16px;">Transparent public-facing view where citizens see every AI decision with full explainability — "Why did the AI reroute traffic?" — building public trust through radical transparency.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <img class="screenshot" src="screenshot_11_citizen_portal_1773518647552.png" alt="Citizen Portal">
+    <img class="screenshot" src="screenshot_08_public_pulse_1773518622404.png" alt="Public Pulse">
+  </div>
+  <div class="logo-bar">SHASHNAM OS</div><div class="slide-num">19 / 19</div>
+</div>
+
+<div class="slide-hint" id="hint">← →  Navigate  ·  F  Fullscreen</div>
+
+<script>
+(function(){
+  const slides = document.querySelectorAll('.slide');
+  let current = 0;
+  const total = slides.length;
+
+  function show(idx) {
+    slides.forEach(s => s.classList.remove('active'));
+    if (idx < 0) idx = 0;
+    if (idx >= total) idx = total - 1;
+    current = idx;
+    slides[current].classList.add('active');
+    // hide hint after first nav
+    const h = document.getElementById('hint');
+    if (h && current > 0) h.style.opacity = '0';
+  }
+
+  show(0);
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+      e.preventDefault();
+      show(current + 1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      show(current - 1);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      show(0);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      show(total - 1);
+    } else if (e.key === 'f' || e.key === 'F') {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    }
+  });
+
+  // click to advance
+  document.addEventListener('click', function(e) {
+    if (e.clientX > window.innerWidth / 2) {
+      show(current + 1);
+    } else {
+      show(current - 1);
+    }
+  });
+})();
+</script>
+</body>
+</html>
